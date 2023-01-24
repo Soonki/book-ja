@@ -12,11 +12,21 @@ Privacy”][modules] section). A *package* is one or more crates
 that provide a set of functionality. A package contains a *Cargo.toml* file
 that describes how to build those crates.
 -->
-最初に学ぶモジュールシステムの要素は、パッケージとクレートです。
+<!-- 最初に学ぶモジュールシステムの要素は、パッケージとクレートです。
 クレートはバイナリかライブラリのどちらかです。
-*クレートルート (crate root)* とは、Rustコンパイラの開始点となり、クレートのルートモジュールを作るソースファイルのことです（モジュールについて詳しくは[「モジュールを定義して、スコープとプライバシーを制御する」][modules]<!-- ignore -->のセクションで説明します）。
+*クレートルート (crate root)* とは、Rustコンパイラの開始点となり、クレートのルートモジュールを作るソースファイルのことです（モジュールについて詳しくは[「モジュールを定義して、スコープとプライバシーを制御する」][modules]<!-- ignore -->
+<!-- のセクションで説明します）。
 *パッケージ* はある機能群を提供する1つ以上のクレートです。
-パッケージは *Cargo.toml* という、それらのクレートをどのようにビルドするかを説明するファイルを持っています。
+パッケージは *Cargo.toml* という、それらのクレートをどのようにビルドするかを説明するファイルを持っています。 -->
+
+- パッケージとクレート
+  - クレートはバイナリorライブラリ
+  - *クレートルート (crate root)* とは、Rustコンパイラの開始点となり、クレートのルートモジュールを作るソースファイルである。
+    - モジュールについて詳しくは[「モジュールを定義して、スコープとプライバシーを制御する」][modules]のセクションで説明する。
+  - *パッケージ* はある機能群を提供する1つ以上のクレート
+  - パッケージは *Cargo.toml* という、それらのクレートをどのようにビルドするかを説明するファイルを持っている。
+
+---
 
 <!--
 Several rules determine what a package can contain. A package *must* contain
@@ -24,16 +34,25 @@ zero or one library crates, and no more. It can contain as many binary crates
 as you’d like, but it must contain at least one crate (either library or
 binary).
 -->
-パッケージが何を持ってよいかはいくつかのルールで決まっています。
+<!-- パッケージが何を持ってよいかはいくつかのルールで決まっています。
 パッケージは0個か1個のライブラリクレートを持っていないといけません。それ以上は駄目です。
-バイナリクレートはいくらでも持って良いですが、少なくとも（ライブラリでもバイナリでも良いですが）1つのクレートを持っていないといけません。
+バイナリクレートはいくらでも持って良いですが、少なくとも（ライブラリでもバイナリでも良いですが）1つのクレートを持っていないといけません。 -->
+
+- パッケージが何を持ってよいかはいくつかのルールで決まっている。
+  - パッケージは0個か1個のライブラリクレートを持っていないといけない。
+  - バイナリクレートはいくらでも持って良い。
+  - 少なくとも（ライブラリでもバイナリでも良いですが）1つのクレートを持っていないといけない。
+
+---
 
 <!--
 Let’s walk through what happens when we create a package. First, we enter the
 command `cargo new`:
 -->
-パッケージを作る時に何が起こるか見てみましょう。
-まず、`cargo new`というコマンドを入力します：
+<!-- パッケージを作る時に何が起こるか見てみましょう。
+まず、`cargo new`というコマンドを入力します： -->
+
+- パッケージの作成には`cargo new`を使用する。
 
 ```console
 $ cargo new my-project
@@ -45,6 +64,8 @@ $ ls my-project/src
 main.rs
 ```
 
+---
+
 <!--
 When we entered the command, Cargo created a *Cargo.toml* file, giving us a
 package. Looking at the contents of *Cargo.toml*, there’s no mention of
@@ -55,10 +76,18 @@ a library crate with the same name as the package, and *src/lib.rs* is its
 crate root. Cargo passes the crate root files to `rustc` to build the library
 or binary.
 -->
-このコマンドを入力したとき、Cargoは *Cargo.toml* ファイルを作り、パッケージを作ってくれました。
+<!-- このコマンドを入力したとき、Cargoは *Cargo.toml* ファイルを作り、パッケージを作ってくれました。
 *Cargo.toml* の中身を見ても、*src/main.rs* については何も書いてありません。これは、Cargoは *src/main.rs* が、パッケージと同じ名前を持つバイナリクレートのクレートルートであるという慣習に従っているためです。
 同じように、Cargoはパッケージディレクトリに *src/lib.rs* が含まれていたら、パッケージにはパッケージと同じ名前のライブラリクレートが含まれており、*src/lib.rs* がそのクレートルートなのだと判断します。
-Cargoはクレートルートファイルを `rustc`に渡し、ライブラリやバイナリをビルドします。
+Cargoはクレートルートファイルを `rustc`に渡し、ライブラリやバイナリをビルドします。 -->
+
+- *Cargo.toml* ファイルを生成され、パッケージが作成された。
+- *Cargo.toml* の中身を見ても、*src/main.rs* については何も書いていない。
+  - Cargoは *src/main.rs* が、パッケージと同じ名前を持つバイナリクレートのクレートルートであるという慣習に従っているため。
+- Cargoはパッケージディレクトリに *src/lib.rs* が含まれていたら、パッケージにはパッケージと同じ名前のライブラリクレートが含まれており、*src/lib.rs* がそのクレートルートなのだと判断する。
+- Cargoはクレートルートファイルを `rustc`に渡し、ライブラリやバイナリをビルドする。
+
+---
 
 <!--
 Here, we have a package that only contains *src/main.rs*, meaning it only
@@ -67,10 +96,16 @@ and *src/lib.rs*, it has two crates: a library and a binary, both with the same
 name as the package. A package can have multiple binary crates by placing files
 in the *src/bin* directory: each file will be a separate binary crate.
 -->
-今、このパッケージには *src/main.rs* しか含まれておらず、つまりこのパッケージは`my-project`という名前のバイナリクレートのみを持っているということです。
+<!-- 今、このパッケージには *src/main.rs* しか含まれておらず、つまりこのパッケージは`my-project`という名前のバイナリクレートのみを持っているということです。
 もしパッケージが *src/main.rs* と *src/lib.rs* を持っていたら、クレートは2つになります：どちらもパッケージと同じ名前を持つ、ライブラリクレートとバイナリクレートです。
-ファイルを *src/bin* ディレクトリに置くことで、パッケージは複数のバイナリクレートを持つことができます。それぞれのファイルが別々のバイナリクレートになります。
+ファイルを *src/bin* ディレクトリに置くことで、パッケージは複数のバイナリクレートを持つことができます。それぞれのファイルが別々のバイナリクレートになります。 -->
 
+- このパッケージには *src/main.rs* しか含まれておらず、つまりこのパッケージは`my-project`という名前のバイナリクレートのみを持っているということである。
+- もしパッケージが *src/main.rs* と *src/lib.rs* を持っていたら、クレートは2つになる。
+  - どちらもパッケージと同じ名前を持つ、ライブラリクレートとバイナリクレートです。
+- ファイルを *src/bin* ディレクトリに置くことで、パッケージは複数のバイナリクレートを持つことができる。それぞれのファイルが別々のバイナリクレートになる。
+
+---
 
 <!--
 A crate will group related functionality together in a scope so the
@@ -81,10 +116,17 @@ projects by bringing the `rand` crate into our project’s scope. All the
 functionality provided by the `rand` crate is accessible through the crate’s
 name, `rand`.
 -->
-クレートは、関連した機能を一つのスコープにまとめることで、その機能が複数のプロジェクト間で共有しやすいようにします。
+<!-- クレートは、関連した機能を一つのスコープにまとめることで、その機能が複数のプロジェクト間で共有しやすいようにします。
 例えば、[2章][rand]で使った`rand`クレートは、乱数を生成する機能を提供します。
 `rand`クレートを私達のプロジェクトのスコープに持ち込むことで、この機能を私達のプロジェクトで使うことができます。
-`rand`クレートが提供する機能にはすべて、クレートの名前`rand`を使ってアクセスできます。
+`rand`クレートが提供する機能にはすべて、クレートの名前`rand`を使ってアクセスできます。 -->
+
+- クレートは、関連した機能を一つのスコープにまとめることで、その機能が複数のプロジェクト間で共有しやすいようにする。
+- 例えば、[2章][rand]で使った`rand`クレートは、乱数を生成する機能を提供する。
+- `rand`クレートを私達のプロジェクトのスコープに持ち込むことで、この機能を私達のプロジェクトで使うことができる。
+- `rand`クレートが提供する機能にはすべて、クレートの名前`rand`を使ってアクセスできる。
+
+---
 
 <!--
 Keeping a crate’s functionality in its own scope clarifies whether particular
@@ -96,12 +138,18 @@ dependency, the compiler isn’t confused about what the name `Rng` refers to. I
 our crate, it refers to the `struct Rng` that we defined. We would access the
 `Rng` trait from the `rand` crate as `rand::Rng`.
 -->
-クレートの機能をそれ自身のスコープの中に入れたままにしておくことは、ある機能が私達のクレートで定義されたのか`rand`クレートで定義されたのかを明確にし、名前の衝突を予防してくれます。
+<!-- クレートの機能をそれ自身のスコープの中に入れたままにしておくことは、ある機能が私達のクレートで定義されたのか`rand`クレートで定義されたのかを明確にし、名前の衝突を予防してくれます。
 例えば、`rand`クレートは`Rng`という名前のトレイトを提供しています。
 更に、私達のクレートで`Rng`という名前の`struct`を定義することもできます。
 クレートの機能はそのスコープ内の名前空間に位置づけられているので、`rand`を依存先として追加しても、コンパイラは`Rng`という名前が何を意味するのかについて混乱することはないのです。
-私達のクレートでは、私達の定義した`struct Rng`のことであり、`rand`クレートの`Rng`トレイトには`rand::Rng`でアクセスするというわけです。
+私達のクレートでは、私達の定義した`struct Rng`のことであり、`rand`クレートの`Rng`トレイトには`rand::Rng`でアクセスするというわけです。 -->
 
+- クレートの機能をそれ自身のスコープの中に入れたままにしておくことは、名前の衝突を予防してくれる。
+  - 例えば、`rand`クレートは`Rng`という名前のトレイトを提供している。
+  - 更に、私達のクレートで`Rng`という名前の`struct`を定義することもできる。
+  - クレートの機能はそのスコープ内の名前空間に位置づけられているので、`rand`を依存先として追加しても、コンパイラは`Rng`という名前が何を意味するのかについて混乱することはない。
+
+---
 <!--
 Let’s move on and talk about the module system!
 -->
