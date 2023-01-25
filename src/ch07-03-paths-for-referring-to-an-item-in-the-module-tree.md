@@ -8,13 +8,17 @@ To show Rust where to find an item in a module tree, we use a path in the same
 way we use a path when navigating a filesystem. If we want to call a function,
 we need to know its path.
 -->
-ファイルシステムの中を移動する時と同じように、Rustにモジュールツリー内の要素を見つけるためにはどこを探せばいいのか教えるためにパスを使います。
-関数を呼び出したいなら、そのパスを知っていなければなりません。
+<!-- ファイルシステムの中を移動する時と同じように、Rustにモジュールツリー内の要素を見つけるためにはどこを探せばいいのか教えるためにパスを使います。
+関数を呼び出したいなら、そのパスを知っていなければなりません。 -->
+
+- ファイルシステムと同じようにモジュールツリー内の要素を見つけるためにパスを使う。
+
+---
 
 <!--
 A path can take two forms:
 -->
-パスは2つの形を取ることができます：
+<!-- パスは2つの形を取ることができます： -->
 
 <!--
 * An *absolute path* starts from a crate root by using a crate name or a
@@ -22,14 +26,22 @@ A path can take two forms:
 * A *relative path* starts from the current module and uses `self`, `super`, or
   an identifier in the current module.
 -->
-* *絶対パス* は、クレートの名前か`crate`という文字列を使うことで、クレートルートからスタートします。
-* *相対パス* は、`self`、`super`または今のモジュール内の識別子を使うことで、現在のモジュールからスタートします。
+<!-- * *絶対パス* は、クレートの名前か`crate`という文字列を使うことで、クレートルートからスタートします。
+* *相対パス* は、`self`、`super`または今のモジュール内の識別子を使うことで、現在のモジュールからスタートします。 -->
+
+- パスは2つの形を取ることができます：
+  * *絶対パス* : クレートルート(クレートの名前か`crate`)からスタートする。
+  * *相対パス* :`self`、`super`または今のモジュール内の識別子を使うことで、現在のモジュールからスタートする。
 
 <!--
 Both absolute and relative paths are followed by one or more identifiers
 separated by double colons (`::`).
 -->
-絶対パスも相対パスも、その後に一つ以上の識別子がダブルコロン(`::`)で仕切られて続きます。
+<!-- 絶対パスも相対パスも、その後に一つ以上の識別子がダブルコロン(`::`)で仕切られて続きます。 -->
+
+- 区切りはダブルコロン(`::`)を使用する。
+
+---
 
 <!--
 Let’s return to the example in Listing 7-1. How do we call the
@@ -43,14 +55,26 @@ the `pub` Keyword”][pub] section, we’ll go into more detail
 about `pub`. Note that this example won’t compile just yet; we’ll explain why
 in a bit.
 -->
-Listing 7-1の例に戻ってみましょう。
+<!-- Listing 7-1の例に戻ってみましょう。
 `add_to_waitlist`関数をどうやって呼べばいいでしょうか？
 すなわち、`add_to_waitlist`のパスは何でしょうか？
 Listing 7-3 は、モジュールと関数をいくつか取り除いてコードをやや簡潔にしています。
 これを使って、クレートルートに定義された新しい`eat_at_restaurant`という関数から、`add_to_waitlist`関数を呼びだす2つの方法を示しましょう。
 `eat_at_restaurant`関数はこのライブラリクレートの公開 (public) APIの1つなので、`pub`キーワードをつけておきます。
-`pub`については、[パスを`pub`キーワードで公開する][pub]<!-- ignore -->の節でより詳しく学びます。
-この例はまだコンパイルできないことに注意してください。理由はすぐに説明します。
+`pub`については、[パスを`pub`キーワードで公開する][pub]の節でより詳しく学びます。
+この例はまだコンパイルできないことに注意してください。理由はすぐに説明します。 -->
+
+- Listing 7-1の例に戻る。
+
+```rust
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-01/src/lib.rs:here}}
+```
+
+- `add_to_waitlist`関数の呼び方、つまり`add_to_waitlist`のパスは何？
+- Listing 7-3にクレートルートに定義された新しい`eat_at_restaurant`という関数から、`add_to_waitlist`関数を呼びだす2つの方法を示す。
+- `eat_at_restaurant`関数はこのライブラリクレートの公開 (public) APIの1つなので、`pub`キーワードがつく。
+  - `pub`については、[パスを`pub`キーワードで公開する][pub]を参照。
+- この例はまだコンパイルできないことに注意されたい。
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -67,14 +91,19 @@ absolute and relative paths</span>
 -->
 <span class="caption">Listing 7-3: `add_to_waitlist` 関数を絶対パスと相対パスで呼び出す</span>
 
+---
+
 <!--
 The first time we call the `add_to_waitlist` function in `eat_at_restaurant`,
 we use an absolute path. The `add_to_waitlist` function is defined in the same
 crate as `eat_at_restaurant`, which means we can use the `crate` keyword to
 start an absolute path.
 -->
-`eat_at_restaurant`で最初に`add_to_waitlist`関数を呼び出す時、絶対パスを使っています。
-`add_to_waitlist`関数は`eat_at_restaurant`と同じクレートで定義されているので、`crate`キーワードで絶対パスを始めることができます。
+<!-- `eat_at_restaurant`で最初に`add_to_waitlist`関数を呼び出す時、絶対パスを使っています。
+`add_to_waitlist`関数は`eat_at_restaurant`と同じクレートで定義されているので、`crate`キーワードで絶対パスを始めることができます。 -->
+
+- `eat_at_restaurant`で最初に`add_to_waitlist`関数を呼び出す時、絶対パスを使っている。
+- `add_to_waitlist`関数は`eat_at_restaurant`と同じクレートで定義されているので、`crate`キーワードで絶対パスを始めることができる。
 
 <!--
 After `crate`, we include each of the successive modules until we make our way
@@ -83,9 +112,13 @@ we’d specify the path `/front_of_house/hosting/add_to_waitlist` to run the
 `add_to_waitlist` program; using the `crate` name to start from the crate root
 is like using `/` to start from the filesystem root in your shell.
 -->
-`crate`の後は、`add_to_waitlist`にたどり着くまで、後に続くモジュールを書き込んでいます。
+<!-- `crate`の後は、`add_to_waitlist`にたどり着くまで、後に続くモジュールを書き込んでいます。
 同じ構造のファイルシステムを想像すれば、`/front_of_house/hosting/add_to_waitlist`とパスを指定して`add_to_waitlist`を実行していることに相当します。
-`crate`という名前を使ってクレートルートからスタートするというのは、`/`を使ってファイルシステムのルートからスタートするようなものです。
+`crate`という名前を使ってクレートルートからスタートするというのは、`/`を使ってファイルシステムのルートからスタートするようなものです。 -->
+
+- `crate`の後は、`add_to_waitlist`にたどり着くまで、後に続くモジュールを書き込んでいる。
+- 同じ構造のファイルシステムを想像すれば、`/front_of_house/hosting/add_to_waitlist`とパスを指定して`add_to_waitlist`を実行していることに相当する。
+- `crate`という名前を使ってクレートルートからスタートするというのは、`/`を使ってファイルシステムのルートからスタートするようなもの。
 
 <!--
 The second time we call `add_to_waitlist` in `eat_at_restaurant`, we use a
@@ -95,11 +128,17 @@ filesystem equivalent would be using the path
 `front_of_house/hosting/add_to_waitlist`. Starting with a name means that the
 path is relative.
 -->
-`eat_at_restaurant`で2回目に`add_to_waitlist`関数を呼び出す時、相対パスを使っています。
+<!-- `eat_at_restaurant`で2回目に`add_to_waitlist`関数を呼び出す時、相対パスを使っています。
 パスは、モジュールツリーにおいて`eat_at_restaurant`と同じ階層で定義されているモジュールである`front_of_house`からスタートします。
 これはファイルシステムで`front_of_house/hosting/add_to_waitlist`というパスを使っているのに相当します。
-名前から始めるのは、パスが相対パスであることを意味します。
+名前から始めるのは、パスが相対パスであることを意味します。 -->
 
+- `eat_at_restaurant`で2回目に`add_to_waitlist`関数を呼び出す時、相対パスを使っている。
+- パスは、モジュールツリーにおいて`eat_at_restaurant`と同じ階層で定義されているモジュールである`front_of_house`からスタートする。
+- これはファイルシステムで`front_of_house/hosting/add_to_waitlist`というパスを使っているのに相当する。
+- 名前から始めるのは、パスが相対パスであることを意味する。
+
+---
 <!--
 Choosing whether to use a relative or absolute path is a decision you’ll make
 based on your project. The decision should depend on whether you’re more likely
@@ -113,18 +152,29 @@ separately into a module named `dining`, the absolute path to the
 be updated. Our preference is to specify absolute paths because it’s more
 likely to move code definitions and item calls independently of each other.
 -->
-相対パスを使うか絶対パスを使うかは、プロジェクトによって決めましょう。
+<!-- 相対パスを使うか絶対パスを使うかは、プロジェクトによって決めましょう。
 要素を定義するコードを、その要素を使うコードと別々に動かすか一緒に動かすか、どちらが起こりそうかによって決めるのが良いです。
 例えば、`front_of_house`モジュールと`eat_at_restaurant`関数を`customer_experience`というモジュールに移動させると、`add_to_waitlist`への絶対パスを更新しないといけませんが、相対パスは有効なままです。
 しかし、`eat_at_restaurant`関数だけを`dining`というモジュールに移動させると、`add_to_waitlist`への絶対パスは同じままですが、相対パスは更新しないといけないでしょう。
-コードの定義と、その要素の呼び出しは独立に動かしそうなので、絶対パスのほうが好ましいです。
+コードの定義と、その要素の呼び出しは独立に動かしそうなので、絶対パスのほうが好ましいです。 -->
+
+- 相対パスを使うか絶対パスを使うかは、プロジェクトによって決める。
+- 要素を定義するコードを、その要素を使うコードと別々に動かすか一緒に動かすか、どちらが起こりそうかによって決めるのが良い。
+- 例えば、`front_of_house`モジュールと`eat_at_restaurant`関数を`customer_experience`というモジュールに移動させると、`add_to_waitlist`への絶対パスを更新しないといけませんが、相対パスは有効なまま。
+- しかし、`eat_at_restaurant`関数だけを`dining`というモジュールに移動させると、`add_to_waitlist`への絶対パスは同じままですが、相対パスは更新しないといけない。
+- コードの定義と、その要素の呼び出しは独立に動かしそうなので、絶対パスのほうが好ましい。
+
+---
 
 <!--
 Let’s try to compile Listing 7-3 and find out why it won’t compile yet! The
 error we get is shown in Listing 7-4.
 -->
-では、Listing 7-3 をコンパイルしてみて、どうしてこれはまだコンパイルできないのか考えてみましょう！
-エラーをListing 7-4 に示しています。
+<!-- では、Listing 7-3 をコンパイルしてみて、どうしてこれはまだコンパイルできないのか考えてみましょう！
+エラーをListing 7-4 に示しています。 -->
+
+- 次にコンパイルできない理由を考える。
+- エラーをListing 7-4 に示す。
 
 ```console
 {{#include ../listings/ch07-managing-growing-projects/listing-07-03/output.txt}}
@@ -136,14 +186,20 @@ Listing 7-3</span>
 -->
 <span class="caption">Listing 7-4: Listing 7-3のコードをビルドしたときのコンパイルエラー</span>
 
+---
 <!--
 The error messages say that module `hosting` is private. In other words, we
 have the correct paths for the `hosting` module and the `add_to_waitlist`
 function, but Rust won’t let us use them because it doesn’t have access to the
 private sections.
 -->
-エラーメッセージは、`hosting`は非公開 (private) だ、と言っています。
-言い換えるなら、`hosting`モジュールと`add_to_waitlist`関数へのパスは正しいが、非公開な部分へのアクセスは許可されていないので、Rustがそれを使わせてくれないということです。
+<!-- エラーメッセージは、`hosting`は非公開 (private) だ、と言っています。
+言い換えるなら、`hosting`モジュールと`add_to_waitlist`関数へのパスは正しいが、非公開な部分へのアクセスは許可されていないので、Rustがそれを使わせてくれないということです。 -->
+
+- `hosting`は非公開 (private)
+- 言い換えるなら、`hosting`モジュールと`add_to_waitlist`関数へのパスは正しいが、非公開な部分へのアクセスは許可されていないので、Rustがそれを使わせてくれないということ。
+
+---
 
 <!--
 Modules aren’t useful only for organizing your code. They also define Rust’s
@@ -154,6 +210,9 @@ make an item like a function or struct private, you put it in a module.
 モジュールはコードの整理に役立つだけではありません。
 モジュールはRustの *プライバシー境界* も定義します。これは、外部のコードが知ったり、呼び出したり、依存したりしてはいけない実装の詳細をカプセル化する線引きです。
 なので、関数や構造体といった要素を非公開にしたければ、モジュールに入れればよいのです。
+
+- モジュールはRustの *プライバシー境界* も定義する。
+- 
 
 <!--
 The way privacy works in Rust is that all items (functions, methods, structs,
